@@ -8,6 +8,8 @@ function Home() {
     <div className="home">
       <Container>
         <SearchBar/>
+        <h1>Go Near</h1>
+        <span className="home__cta"> Explore nearby stays</span>
       </Container>
     </div>
   );
