@@ -2,7 +2,7 @@ import React from 'react'
 import '../style/SearchBar.css'
 import SearchIcon from '@material-ui/icons/Search';
 
-function SearchBar() {
+function SearchBar({handleSearch}) {
     return (
         <div className="SearchBar d-flex flex-row">
             <div className="SearchBar__input-box">
@@ -22,7 +22,7 @@ function SearchBar() {
                 <input placeholder="Add guests" name="guests" type="number"/>
             </div>
             <div className="SearchBar__search-box d-flex align-items-center">
-                <span className="d-flex"><SearchIcon/> Search</span>
+                <span className="d-flex" onClick={()=>handleSearch()}><SearchIcon/> Search</span>
             </div>
 
         </div>

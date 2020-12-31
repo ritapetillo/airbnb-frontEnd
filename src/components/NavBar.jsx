@@ -1,20 +1,44 @@
-import React from "react";
-import { Navbar, Nav, NavDropdown, Image } from "react-bootstrap";
-import logo from "../assets/img/logowhite.png";
+import React,{useEffect,useMemo,useState} from "react";
+import { Navbar, Nav, NavDropdown, Image ,Container} from "react-bootstrap";
+import logowhite from "../assets/img/logowhite.png";
+import logored from "../assets/img/logored.png";
+
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MenuIcon from '@material-ui/icons/Menu';
 import "../style/NavBar.css";
+import {withRouter, Link} from 'react-router-dom'
 
-function NavBar() {
+
+function NavBar({history}) {
+  // const [path, setPath] = useState('/')
+
+  // useEffect(()=>{
+  //   setPath(history.location.pathname)
+  //   console.log(path)
+  //   console.log(history.location.pathname)
+  // },[history.location.pathname])
+
+  const logo = useMemo(() => history.location.pathname ==='/' ? logowhite : logored
+  , [history.location.pathname])
+
+  const navbarClass = useMemo(() => history.location.pathname ==='/' ? "NavBar" : "NavBar NavBar-white"
+  , [history.location.pathname])
+
+  const path = useMemo(() => {console.log('changed') 
+  return history.location.pathname }, [history.location.pathname])
+  console.log(path)
+
   return (
-    <Navbar  expand="lg" className="NavBar">
+    <Navbar  expand="lg" className={navbarClass}>
+          <Container>
+
       <Navbar.Brand href="#home">
-        <Image src={logo} className="logo" rounded />
+        <Link to="/"><Image src={logo} className="logo" rounded /></Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
-          <Nav.Link href="#home" className="NavBar__link active">Place to stay</Nav.Link>
+         <Link to="/search" ><Nav.Link href="#home" className="NavBar__link active">Place to stay</Nav.Link></Link>
           <Nav.Link href="#link" className="NavBar__link">Experiences</Nav.Link>
           <Nav.Link href="#link" className="NavBar__link">Online Experiences</Nav.Link>
 
@@ -34,8 +58,10 @@ function NavBar() {
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
+      </Container>
+
     </Navbar>
   );
 }
 
-export default NavBar;
+export default withRouter(NavBar);

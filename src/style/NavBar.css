@@ -2,10 +2,16 @@
   height: 50px;
 }
 .NavBar {
-  margin-bottom: -120px;
+  
+  margin-bottom: -80px;
   z-index: 11120;
   display: flex;
-  padding:0px 10px;
+  padding:20px 10px;
+  height: 80px;
+}
+.NavBar-white{
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px !important;
+  background-color: white;
 }
 
 .navbar-light .navbar-nav .nav-link.active{
@@ -27,10 +33,17 @@ font-weight: 700;
 font-size: 14px;
 }
 
+
+  
+
 .NavBar .navbar-nav a.nav-link{
   color:white;
   position: relative;
 }
+.NavBar.NavBar-white .navbar-nav a.nav-link{
+  color:black;
+
+  }
 .NavBar__drop-title{
   background-color: white;
   display: flex;
