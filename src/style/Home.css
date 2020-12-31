@@ -5,4 +5,7 @@
   background-position: top center;
   height: 100vh;
   z-index: 0;
+  padding-top: 150px;
+  display: flex;
+  justify-content: center;
 }

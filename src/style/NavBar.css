@@ -2,6 +2,75 @@
   height: 50px;
 }
 .NavBar {
-  margin-bottom: -100px;
+  margin-bottom: -120px;
   z-index: 11120;
+  display: flex;
+  padding:0px 10px;
+}
+
+.navbar-light .navbar-nav .nav-link.active{
+  color: white;
+}
+.nav-link.active::after{
+  background-color:white;
+  content: "";
+  position:absolute;
+  height: 3px;
+  width: 30px;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.NavBar a .NavBar__link{
+color:white;
+font-weight: 700;
+font-size: 14px;
+}
+
+.NavBar .navbar-nav a.nav-link{
+  color:white;
+  position: relative;
+}
+.NavBar__drop-title{
+  background-color: white;
+  display: flex;
+  height: 42px;
+  width: 77px;
+  align-items: center;
+  justify-content:center;
+border-radius: 30px;
+margin-top:20px;
+}
+
+.NavBar .MuiSvgIcon-root:nth-child(2){
+  font-size: 33px;
+  color:gray;
+
+}
+.dropdown-toggle .nav-link{
+  align-items: center;
+}
+
+
+.NavBar .MuiSvgIcon-root:nth-child(1){
+  font-size: 20px;
+  color: black;
+  margin-right: 5px;
+}
+
+.dropdown-toggle::after{
+  opacity: 0%;
+}
+
+.dropdown-menu.show{
+  left:-50%;
+  transform: translateX(-40%);
+  top:80%;
+  height: fit-content;
+  border-radius: 30px;
+  width: 20vw;
+  overflow: hidden;
+}
+.NavBar__right-menu{
+  align-items: center;
 }

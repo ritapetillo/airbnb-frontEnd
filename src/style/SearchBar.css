@@ -1,0 +1,75 @@
+.SearchBar{
+    background-color: white;
+    padding:10px 10px;
+    padding-left: 20px;
+    border-radius: 40px;
+    display: flex;
+    width: fit-content;
+    justify-content: space-between;
+    overflow: hidden;
+
+
+}
+
+.SearchBar__input-box{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    padding:0px 10px;
+    position: relative;
+    cursor: pointer;
+
+}
+.SearchBar__input-box:hover::after{
+    background-color: #EBEBEB;
+    opacity: 40%;
+    width: 130%;
+    height: 160%;
+    top:-15px;
+    left: -30px;
+    padding: 0;
+    border-radius: 40px;
+    pointer-events:none;
+    
+    
+}
+.SearchBar__input-box::after{
+    position: absolute;
+    content:"";
+    right: 0;
+    top:20%;
+    height: 30px;
+    width: 1px;
+    background-color:rgb(238, 237, 237);
+
+
+}
+.SearchBar__input-box:nth-child(4){
+    width: 15%;
+    border-right: none;
+    margin-right: 0;
+}
+
+.SearchBar__input-box  small {
+    font-size: 12px;
+    font-weight: 700;
+    color: black;
+    z-index: 10;
+}
+
+.SearchBar__input-box input{
+    border:none;
+    outline:none;
+}
+
+
+.SearchBar__search-box span{
+    transition: opacity 1.25s ease 0s !important;
+background-color: #FF385C ;   
+justify-content: center;
+    color: white;
+    border-radius: 50px;
+    width: 100%;
+    font-weight: 700;
+    padding: 10px;
+}
