@@ -10,13 +10,7 @@ import {withRouter, Link} from 'react-router-dom'
 
 
 function NavBar({history}) {
-  // const [path, setPath] = useState('/')
 
-  // useEffect(()=>{
-  //   setPath(history.location.pathname)
-  //   console.log(path)
-  //   console.log(history.location.pathname)
-  // },[history.location.pathname])
 
   const logo = useMemo(() => history.location.pathname ==='/' ? logowhite : logored
   , [history.location.pathname])
@@ -24,9 +18,16 @@ function NavBar({history}) {
   const navbarClass = useMemo(() => history.location.pathname ==='/' ? "NavBar" : "NavBar NavBar-white"
   , [history.location.pathname])
 
-  const path = useMemo(() => {console.log('changed') 
-  return history.location.pathname }, [history.location.pathname])
-  console.log(path)
+  const links = useMemo(() => {
+    return history.location.pathname !=='/' ? "" :
+    <Nav className="ml-auto">
+    <Link to="/search" ><Nav.Link href="#home" className="NavBar__link active">Place to stay</Nav.Link></Link>
+     <Nav.Link href="#link" className="NavBar__link">Experiences</Nav.Link>
+     <Nav.Link href="#link" className="NavBar__link">Online Experiences</Nav.Link>
+
+     </Nav>
+
+  }, [history.location.pathname])
 
   return (
     <Navbar  expand="lg" className={navbarClass}>
@@ -37,12 +38,7 @@ function NavBar({history}) {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="ml-auto">
-         <Link to="/search" ><Nav.Link href="#home" className="NavBar__link active">Place to stay</Nav.Link></Link>
-          <Nav.Link href="#link" className="NavBar__link">Experiences</Nav.Link>
-          <Nav.Link href="#link" className="NavBar__link">Online Experiences</Nav.Link>
-
-          </Nav>
+    {links}
         <Nav className="ml-auto NavBar__right-menu">
           <Nav.Link className="NavBar__right-menu" href="#link">Become a host</Nav.Link>
           <NavDropdown title={<span className="NavBar__drop-title"><MenuIcon/> <AccountCircleIcon/></span>} id="basic-nav-dropdown">
