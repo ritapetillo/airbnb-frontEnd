@@ -2,12 +2,13 @@
   height: 50px;
 }
 .NavBar {
-  
-  margin-bottom: -80px;
   z-index: 11120;
   display: flex;
-  padding:20px 10px;
-  height: 80px;
+  flex-wrap: wrap;
+  padding:0px 0px;
+  height: fit-content;
+  min-height: 50px;
+  padding: 8px 0px;
 }
 .NavBar-white{
   box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px !important;
@@ -33,26 +34,41 @@ font-weight: 700;
 font-size: 14px;
 }
 
+.NavBar__drop-title:hover{
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+}
 
   
 
 .NavBar .navbar-nav a.nav-link{
   color:white;
   position: relative;
+  display: flex;
 }
 .NavBar.NavBar-white .navbar-nav a.nav-link{
   color:black;
 
   }
 .NavBar__drop-title{
+  border: 1px solid #ddd;
   background-color: white;
   display: flex;
-  height: 42px;
   width: 77px;
   align-items: center;
   justify-content:center;
 border-radius: 30px;
-margin-top:20px;
+padding: 5px 10px;
+transition: box-shadow 0.2s ease !important;
+    transition-property: box-shadow !important;
+    transition-duration: 0.2s !important;
+    transition-timing-function: ease !important;
+    transition-delay: 0s !important;
+
+}
+.NavBar .MuiSvgIcon-root{
+align-self: center;
+
 }
 
 .NavBar .MuiSvgIcon-root:nth-child(2){

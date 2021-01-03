@@ -1,0 +1,21 @@
+/* colors */
+*{
+    box-sizing: border-box;
+}
+:root{
+--pink-search: #FF385C;
+--light-gray-text:rgb(113, 113, 113) 
+}
+
+.divider{
+    height: 1px;
+    background-color: lightgray;
+    width: 40px;
+    display: block;
+}
+
+.cover{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

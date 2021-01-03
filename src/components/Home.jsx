@@ -1,23 +1,18 @@
-import React , {useState,useEffect} from "react";
+
+import React , {useState,useEffect,useContext,useRef} from "react";
 import "../style/Home.css";
 import {Container} from 'react-bootstrap'
 import SearchBar from "./SearchBar";
-import {getListingsByCity} from '../lib/fetches'
+import AppContext from '../context/app-context'
 
-function Home() {
-  const [listings,setListings] = useState('')
-  const handleSearch = async () =>{
-const listings = await getListingsByCity('Miami FL')
-setListings(listings)
-console.log(listings)
-
-  }
+function Home({history}) {
+  // const [listings,setListings] = useState('')
 
 
   return (
     <div className="home">
       <Container>
-        <SearchBar handleSearch={handleSearch}/>
+        <SearchBar history={history}/>
         <h1>Go Near</h1>
         <span className="home__cta"> Explore nearby stays</span>
       </Container>

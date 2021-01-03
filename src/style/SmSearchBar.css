@@ -1,0 +1,54 @@
+.SmSearchBar{
+    border:1px solid #DDDDDD;
+    border-radius: 28px;
+    font-weight: 700;
+color:#222;
+font-size: 14px;
+display: flex;
+padding: 10px 8px;
+transition: box-shadow 0.2s ease !important;
+    transition-property: box-shadow !important;
+    transition-duration: 0.2s !important;
+    transition-timing-function: ease !important;
+    transition-delay: 0s !important;
+
+
+
+}
+.SmSearchBar:hover{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+}
+
+.SmSearchBar span:not(:last-child){
+padding-right: 6px;
+border-right: 1px solid #DDDDDD;
+}
+.SmSearchBar span{
+    padding-left: 6px;
+    display: flex;
+    align-items: center;
+    }
+   
+    
+.SmSearchBar__search{
+    background-color: var(--pink-search);
+    color:white;
+  height: 32px;
+  width: 32px;
+border-radius: 50%;
+  margin-left: 8px;
+  display: flex;
+  align-content: center;
+
+  
+}
+
+.SmSearchBar .SmSearchBar__search .MuiSvgIcon-root{
+    color:white;
+    font-size: 18px;
+    align-self:center;
+   
+  
+
+}

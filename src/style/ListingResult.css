@@ -1,0 +1,40 @@
+.ListingResult{
+    padding: 24px 5px;
+    border-top: 1px solid lightgray;
+    height: 200px;
+    color:#484848
+}
+.ListingResult__stars svg{
+    font-size: 22px;
+    align-self:flex-end;
+    color:var(--pink-search);
+    margin-right: 4px;
+}
+
+.ListingResult .carousel-item{
+    height: 200px;
+}
+.ListingResult img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.ListingResult span{
+    color:var(--light-gray-text);
+    font-size: 14px;
+}
+.ListingResult .divider{
+    margin-bottom: 8px;
+}
+.ListingResult h5{
+    font-size: 24px;
+    margin-bottom:12px;
+}
+.ListingResult__rate{
+    text-align: right;
+}
+.ListingResult__rate h5{
+    margin-bottom: 5px;
+
+}
