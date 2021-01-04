@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 
-const useOutsideClick = (reff, callback) => {
-  console.log(reff)
-  const handleClick = e => {
-
-    if (reff.current && !reff.current.contains(e.target) 
-    && e.target.className !== 'SmSearchBar ml-auto') {
-      console.log('sd')
-
-      console.log(e.target.className)
+const useOutsideClick = (ref, callback) => {
+  console.log(ref);
+  const handleClick = (e) => {
+    if (
+      ref.current &&
+      !ref.current.contains(e.target) &&
+      e.target.className !== "SmSearchBar ml-auto"
+    ) {
+      console.log(e.target);
       callback();
     }
   };
