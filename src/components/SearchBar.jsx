@@ -13,6 +13,8 @@ function SearchBar({history}) {
 
     const handleSearch = async (queries) =>{
         console.log(queries)
+        console.log(localStorage.getItem('TOKEN'))
+
     getListings(queries)
     
     console.log()

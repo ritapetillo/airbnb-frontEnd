@@ -1,13 +1,8 @@
-.searchPage{
-    margin-top: 50px;
-}
-
-.searchPage__map-btn{
+.ListingsMap__list-btn{
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgb(85, 85, 97);
-    opacity: 0.6;
     color:white;
     width: 100px;
     height: 50px;
@@ -16,13 +11,11 @@
     bottom: 20px;
     left: 50%;
     font-weight: 700;
+    z-index: 3000;
     cursor: pointer;
+    opacity: 0.6;
 }
-
-.searchPage__map-btn:hover{
+.ListingsMap__list-btn:hover{
     background-color: rgb(66, 66, 71);
     opacity: 1;
-
-
- 
 }

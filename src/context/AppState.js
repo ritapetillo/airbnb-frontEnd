@@ -1,16 +1,55 @@
-import React,{useState,useReducer} from 'react'
-import { SEARCH_LISTINGS } from './app-actions'
+import React,{useState,useReducer,useEffect} from 'react'
+import { SEARCH_LISTINGS, AUTH ,LOGOUT} from './app-actions'
 import AppContext from './app-context'
 import appReducer from './app-reducer'
-import {getListingsResearch} from '../lib/fetches'
+import {getListingsResearch,login,getUser} from '../lib/fetches'
+import appContext from './app-context'
 
 function AppState(props) {
     const [isAuth,setisAuth] = useState(false)
     const [lastSearch,setLastSearch]= useState()
     const initialState={
-        listings:[]
+        listings:[],
+        user:"",
+        isAuth:false
     }
     const [state,dispatch] = useReducer(appReducer,initialState)
+    useEffect(() => {
+        const token = JSON.parse(localStorage.getItem('TOKEN'))
+        if(token){
+            const user = getUser(token)
+                dispatch({
+                    type:AUTH,
+                   payload:user
+
+                })
+        }
+    
+    }, [])
+
+    const doLogin = async (cred) =>{
+        try{
+            console.log(cred)
+            const token = await login(cred)
+               if(token){
+                await localStorage.setItem('TOKEN',JSON.stringify(token))
+                const user = await getUser(token)
+                dispatch({
+                    type:AUTH,
+                   payload:user
+
+                })
+            } }catch(err){
+                console.log(err)
+            }        }
+
+   const doLogout = async () =>{
+await localStorage.clear()
+dispatch({
+    type:LOGOUT
+})
+
+   }
 
     const getListings = async (queries)=>{
         const {city,
@@ -32,7 +71,7 @@ try{
     }
 
     return (
-       <AppContext.Provider value={{listings:state.listings,isAuth,setisAuth,getListings,lastSearch}}>
+       <AppContext.Provider value={{listings:state.listings,isAuth:state.isAuth,setisAuth,getListings,lastSearch,user:state.user,doLogin,doLogout}}>
            {props.children}
        </AppContext.Provider>
     )

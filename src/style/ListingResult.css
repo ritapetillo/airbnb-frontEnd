@@ -2,7 +2,8 @@
     padding: 24px 5px;
     border-top: 1px solid lightgray;
     height: 200px;
-    color:#484848
+    color:#484848;
+    margin:20px 0px 46px;
 }
 .ListingResult__stars svg{
     font-size: 22px;

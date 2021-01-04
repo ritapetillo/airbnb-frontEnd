@@ -3,6 +3,8 @@ import {Row,Col, Image, Carousel} from 'react-bootstrap'
 import moment from 'moment'
 import StarIcon from '@material-ui/icons/Star';
 import '../style/ListingResult.css'
+import AppContext from '../context/app-context'
+
 
 
 function ListingResult({listing,lastSearch}) {

@@ -1,5 +1,5 @@
-import React,{useEffect,useMemo,useRef,useState} from "react";
-import { Navbar, Nav, NavDropdown, Image ,Container,Row,Modal,Button} from "react-bootstrap";
+import React,{useEffect,useMemo,useRef,useState,useContext} from "react";
+import { Navbar, Nav, NavDropdown, Image ,Container,Row,Modal,Button,InputGroup,FormControl} from "react-bootstrap";
 import logowhite from "../assets/img/logowhite.png";
 import logored from "../assets/img/logored.png";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -9,12 +9,16 @@ import {withRouter, Link} from 'react-router-dom'
 import SmSearchBar from "./SmSearchBar";
 import SearchBar from "./SearchBar";
 import useOutsideClick from './useOutsideClick'
+import ModalLogin from "./ModalLogin";
+import AppContext from '../context/app-context'
+
 
 
 
 
 function NavBar({history}) {
   const [searchActive, setSearchActive] = useState(false)
+  const {isAuth,doLogout} = useContext(AppContext)
   const [showLogin,setShowLogin] = useState(false)
   const ref = useRef()
 
@@ -43,6 +47,7 @@ function NavBar({history}) {
   });
 
 
+
   return (
     <>
     <Navbar  expand="lg" className={navbarClass}>
@@ -57,7 +62,7 @@ function NavBar({history}) {
         <Nav className="ml-auto NavBar__right-menu">
           <Nav.Link className="NavBar__right-menu" href="#link">Become a host</Nav.Link>
           <NavDropdown title={<span className="NavBar__drop-title"><MenuIcon/> <AccountCircleIcon/></span>} id="basic-nav-dropdown">
-            <NavDropdown.Item onClick={()=>setShowLogin(!showLogin)} href="#action/3.1">Login</NavDropdown.Item>
+            {!isAuth && <NavDropdown.Item onClick={()=>setShowLogin(!showLogin)} href="#action/3.1">Login</NavDropdown.Item>}
             <NavDropdown.Item href="#action/3.2">
               Another action
             </NavDropdown.Item>
@@ -66,6 +71,10 @@ function NavBar({history}) {
             <NavDropdown.Item href="#action/3.4">
               Separated link
             </NavDropdown.Item>
+            {isAuth &&
+            <NavDropdown.Item href="#action/3.4" onClick={()=>doLogout()}>
+              Logout
+            </NavDropdown.Item>}
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
@@ -78,19 +87,8 @@ function NavBar({history}) {
 
     </Navbar>
 
-    <Modal show={showLogin} onHide={()=>setShowLogin(!showLogin)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-         
-          <Button variant="primary" onClick={()=>setShowLogin(!showLogin)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-     
+    
+     <ModalLogin showLogin={showLogin} setShowLogin={setShowLogin}/>
  
            
            </>
