@@ -93,8 +93,8 @@ align-self: center;
 
 .dropdown-menu.show{
   left:-50%;
-  transform: translateX(-40%);
-  top:80%;
+  transform: translateX(-30%);
+  top:100%;
   height: fit-content;
   border-radius: 30px;
   width: 20vw;

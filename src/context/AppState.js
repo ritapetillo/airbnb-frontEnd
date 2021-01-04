@@ -2,7 +2,7 @@ import React,{useState,useReducer,useEffect} from 'react'
 import { SEARCH_LISTINGS, AUTH ,LOGOUT} from './app-actions'
 import AppContext from './app-context'
 import appReducer from './app-reducer'
-import {getListingsResearch,login,getUser} from '../lib/fetches'
+import {getListingsResearch,login,getUser,register} from '../lib/fetches'
 import appContext from './app-context'
 
 function AppState(props) {
@@ -51,6 +51,26 @@ dispatch({
 
    }
 
+   const doRegister = async (cred) =>{
+    try{
+        const token = JSON.parse(localStorage.getItem('TOKEN'))
+        console.log(cred)
+           if(token){
+            await localStorage.clear()}
+            const user = await register(cred)
+            console.log(user)
+            // dispatch({
+            //     type:AUTH,
+            //    payload:user
+
+            // })
+        }catch(err){
+            console.log(err)
+        }        }
+
+
+
+
     const getListings = async (queries)=>{
         const {city,
             checkin,
@@ -71,7 +91,7 @@ try{
     }
 
     return (
-       <AppContext.Provider value={{listings:state.listings,isAuth:state.isAuth,setisAuth,getListings,lastSearch,user:state.user,doLogin,doLogout}}>
+       <AppContext.Provider value={{listings:state.listings,isAuth:state.isAuth,setisAuth,getListings,lastSearch,user:state.user,doLogin,doLogout,doRegister}}>
            {props.children}
        </AppContext.Provider>
     )

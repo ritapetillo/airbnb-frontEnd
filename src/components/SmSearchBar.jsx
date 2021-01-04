@@ -4,13 +4,14 @@ import moment from 'moment'
 import AppContext from '../context/app-context'
 import SearchIcon from '@material-ui/icons/Search';
 
-function SmSearchBar({setSearchActive}) {
+function SmSearchBar({setSearchActive,searchActive}) {
     const {lastSearch} = useContext(AppContext)
 
     return (
    
         <div className="SmSearchBar ml-auto" onClick={()=>{
             setSearchActive(true)
+            console.log(searchActive)
         }}>
              {lastSearch &&<>
             <span>{lastSearch.city}</span>

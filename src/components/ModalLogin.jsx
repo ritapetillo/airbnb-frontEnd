@@ -1,26 +1,22 @@
 import React,{useEffect,useState, useContext} from 'react'
 import { Modal,Button,InputGroup,FormControl} from "react-bootstrap";
+import { unmountComponentAtNode } from 'react-dom';
 import AppContext from '../context/app-context'
 
 
 
-function ModalLogin({showLogin,setShowLogin}) {
+function ModalLogin({handleShowLogin,show}) {
     
-    const [show,setShow] = useState(false)
     const [credentials, setCredentials] = useState()
-    useEffect(() => {
-       setShow(showLogin) 
-        
-    }, [showLogin])
     const {doLogin} = useContext(AppContext)
 
 
     const handleSubmit = async ()=>{
         const log = await doLogin(credentials)
-setShow(!show)
+        handleShowLogin()
     }
     return (
-        <Modal show={show} onHide={()=>setShowLogin(!show)}>
+        <Modal show={show} onHide={handleShowLogin}>
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
@@ -54,7 +50,7 @@ setShow(!show)
   </Modal.Body>
         <Modal.Footer>
          
-          <Button variant="primary" onClick={()=>setShowLogin(!showLogin)}>
+          <Button variant="primary" onClick={handleShowLogin}>
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit}>

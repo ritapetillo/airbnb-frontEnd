@@ -11,6 +11,8 @@ import SearchBar from "./SearchBar";
 import useOutsideClick from './useOutsideClick'
 import ModalLogin from "./ModalLogin";
 import AppContext from '../context/app-context'
+import ModalSignUp from "./ModalSignUp";
+import { unmountComponentAtNode } from "react-dom";
 
 
 
@@ -18,9 +20,11 @@ import AppContext from '../context/app-context'
 
 function NavBar({history}) {
   const [searchActive, setSearchActive] = useState(false)
-  const {isAuth,doLogout} = useContext(AppContext)
+  const {isAuth,doLogout,user} = useContext(AppContext)
   const [showLogin,setShowLogin] = useState(false)
-  const ref = useRef()
+  const [showSignUp,setShowSignUp] = useState(false)
+
+  const reff = useRef()
 
 
   const logo = useMemo(() => history.location.pathname ==='/' ? logowhite : logored
@@ -30,8 +34,17 @@ function NavBar({history}) {
   , [history.location.pathname])
 
 
+  useOutsideClick(reff, () => {
+    if(searchActive) setSearchActive(false)
+    if(!searchActive) setSearchActive(true)
+  });
+
+ const handleShowLogin = () =>{
+    setShowLogin(!showLogin)
+    
+  }
   const links = useMemo(() => {
-    return history.location.pathname ==='/search' && !searchActive ? <SmSearchBar setSearchActive={setSearchActive}/> :
+    return history.location.pathname ==='/search' && !searchActive ? <SmSearchBar setSearchActive={setSearchActive} searchActive={searchActive}/> :
     <Nav className="ml-auto">
     <Link to="/search" ><Nav.Link href="#home" className="NavBar__link active">Place to stay</Nav.Link></Link>
      <Nav.Link href="#link" className="NavBar__link">Experiences</Nav.Link>
@@ -41,10 +54,6 @@ function NavBar({history}) {
 
   }, [history.location.pathname,searchActive])
 
-
-  useOutsideClick(ref, () => {
-    if(searchActive) setSearchActive(false)
-  });
 
 
 
@@ -62,14 +71,17 @@ function NavBar({history}) {
         <Nav className="ml-auto NavBar__right-menu">
           <Nav.Link className="NavBar__right-menu" href="#link">Become a host</Nav.Link>
           <NavDropdown title={<span className="NavBar__drop-title"><MenuIcon/> <AccountCircleIcon/></span>} id="basic-nav-dropdown">
-            {!isAuth && <NavDropdown.Item onClick={()=>setShowLogin(!showLogin)} href="#action/3.1">Login</NavDropdown.Item>}
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            {!isAuth && <><NavDropdown.Item onClick={()=>setShowLogin(!showLogin)} href="#action/3.1">Login</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.2" onClick={()=>setShowSignUp(!showSignUp)}>
+              Sign Up
+            </NavDropdown.Item></>}
+            {isAuth && <span className="ml-4">Hi {user && user.firstName}</span>}
             <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">
-              Separated link
+              Host your home
+            </NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.4">
+              Help
             </NavDropdown.Item>
             {isAuth &&
             <NavDropdown.Item href="#action/3.4" onClick={()=>doLogout()}>
@@ -80,7 +92,7 @@ function NavBar({history}) {
       </Navbar.Collapse>
      
       </Container>
-      {searchActive && <div ref={ref} className="NavBar__search-box d-block ml-auto mx-auto"> <SearchBar history={history}/>
+      {searchActive && <div reff={reff} className="NavBar__search-box d-block ml-auto mx-auto"> <SearchBar history={history}/>
       </div> }
       
      
@@ -88,7 +100,9 @@ function NavBar({history}) {
     </Navbar>
 
     
-     <ModalLogin showLogin={showLogin} setShowLogin={setShowLogin}/>
+     <ModalLogin handleShowLogin={handleShowLogin} show={showLogin}/>
+     <ModalSignUp showSignUp={showSignUp} setShowSignUp={setShowSignUp}/>
+
  
            
            </>
