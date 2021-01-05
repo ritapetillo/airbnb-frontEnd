@@ -5,9 +5,11 @@ import moment from "moment";
 import StarIcon from "@material-ui/icons/Star";
 import "../style/ListingResult.css";
 import AppContext from "../context/app-context";
+import { getTotNights } from "../lib/datesCalc";
 
 function ListingResult({ listing, lastSearch }) {
   const [totRate, setTotRate] = useState("");
+
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
@@ -15,9 +17,7 @@ function ListingResult({ listing, lastSearch }) {
   };
 
   useEffect(() => {
-    const checkin = moment(lastSearch.checkin);
-    const checkout = moment(lastSearch.checkout);
-    const nights = checkout.diff(checkin, "days");
+    const nights = getTotNights(lastSearch.checkin, lastSearch.checkout);
     const totRate = nights * listing?.rate;
     setTotRate(totRate);
   }, [listing]);

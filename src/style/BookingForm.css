@@ -6,9 +6,67 @@
   border-radius: 20px;
   padding: 30px;
 }
+.BookingForm > .row {
+  margin: 0px;
+}
 .BookingForm__top {
-  /* padding: 30px !important; */
+  margin: 0px;
 }
 .BookingForm__top small {
   font-size: 16px;
+}
+.BookingForm__form {
+  width: 100%;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  margin: 10px 0 !important;
+  overflow: hidden;
+}
+.BookingForm__form div {
+  min-height: 60px;
+  padding: 12px 12px 10px;
+}
+.BookingForm__form div:first-child {
+  border-right: 1px solid var(--medium-gray);
+}
+.BookingForm__form div:last-child {
+  border-top: 1px solid var(--medium-gray);
+}
+.BookingForm__form small {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.BookingForm__form input {
+  width: 100%;
+  border: none;
+  font-size: 14px;
+}
+.BookingForm__form input[type="date"]::-webkit-inner-spin-button,
+.BookingForm__form input[type="date"]::-webkit-calendar-picker-indicator {
+  font-size: 8px;
+  margin-left: -8px;
+}
+
+.BookingForm .BookingForm__reserve-cta {
+  color: white;
+  background: linear-gradient(
+    to right,
+    rgb(230, 30, 77) 0%,
+    rgb(227, 28, 95) 50%,
+    rgb(215, 4, 102) 100%
+  ) !important;
+  background-image: linear-gradient(
+    to right,
+    rgb(230, 30, 77) 0%,
+    rgb(227, 28, 95) 50%,
+    rgb(215, 4, 102) 100%
+  ) !important;
+  width: 100%;
+  display: block;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: 700;
 }
