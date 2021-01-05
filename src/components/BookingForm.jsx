@@ -10,12 +10,25 @@ function BookingForm({ listing }) {
   const [nights, setNights] = useState("");
   const [tot, setTot] = useState("");
 
-  const { lastSearch, user } = useContext(AppContext);
+  const { lastSearch, user, registerBooking } = useContext(AppContext);
   useEffect(() => {
+    setBookDetails({
+      ...lastSearch,
+    });
     setNights(getTotNights(lastSearch.checkin, lastSearch.checkout));
     const cleaningFees = listing.cleaningFee ? listing.cleaningFee : 0;
     setTot(Number(nights * listing.rate + cleaningFees));
+    console.log(tot);
   }, []);
+
+  const handleSubmitBooking = () => {
+    const body = {
+      ...bookDetails,
+      listing: listing._id,
+      totalAmount: tot,
+    };
+    registerBooking(body);
+  };
 
   return (
     <div className="BookingForm">
@@ -61,7 +74,12 @@ function BookingForm({ listing }) {
         </Col>
       </Row>
       <Row>
-        <span className="BookingForm__reserve-cta">Reserve</span>
+        <span
+          className="BookingForm__reserve-cta"
+          onClick={handleSubmitBooking}
+        >
+          Reserve
+        </span>
       </Row>
       <Row className="justify-content-between mt-4">
         <h6>
