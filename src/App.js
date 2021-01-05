@@ -6,6 +6,7 @@ import Home from "./components/Home.jsx";
 import NavBar from "./components/NavBar";
 import SearchPage from "./components/SearchPage";
 import ListingsMap from "./components/ListingsMap";
+import ListingPage from "./components/ListingPage";
 
 function App() {
   return (
@@ -14,9 +15,21 @@ function App() {
 
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />
-        <Route exact path="/search" render={(props) => <SearchPage {...props} />} />
-        <Route exact path="/map" render={(props) => <ListingsMap {...props} />} />
-
+        <Route
+          exact
+          path="/search"
+          render={(props) => <SearchPage {...props} />}
+        />
+        <Route
+          exact
+          path="/map"
+          render={(props) => <ListingsMap {...props} />}
+        />
+        <Route
+          exact
+          path="/listing/:id"
+          render={(props) => <ListingPage {...props} />}
+        />
       </Switch>
     </div>
   );

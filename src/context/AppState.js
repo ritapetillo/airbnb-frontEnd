@@ -9,7 +9,8 @@ function AppState(props) {
     const [isAuth,setisAuth] = useState(false)
     const [lastSearch,setLastSearch]= useState()
     const initialState={
-        listings:[],
+        listings: [],
+        currentListing:"",
         user:"",
         isAuth:false
     }
@@ -26,6 +27,7 @@ function AppState(props) {
         }
     
     }, [])
+ 
 
     const doLogin = async (cred) =>{
         try{

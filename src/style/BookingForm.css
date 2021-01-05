@@ -1,0 +1,14 @@
+.BookingForm {
+  margin: 50px 50px;
+  width: 100%;
+  border: 1px solid #ddd;
+  min-height: 400px;
+  border-radius: 20px;
+  padding: 30px;
+}
+.BookingForm__top {
+  /* padding: 30px !important; */
+}
+.BookingForm__top small {
+  font-size: 16px;
+}
