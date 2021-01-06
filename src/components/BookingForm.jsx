@@ -5,7 +5,7 @@ import StarIcon from "@material-ui/icons/Star";
 import AppContext from "../context/app-context";
 import { getTotNights } from "../lib/datesCalc";
 
-function BookingForm({ listing }) {
+function BookingForm({ listing, history }) {
   const [bookDetails, setBookDetails] = useState({
     checkin: "",
     checkout: "",
@@ -26,14 +26,15 @@ function BookingForm({ listing }) {
     setNights(getTotNights(bookDetails?.checkin, bookDetails?.checkout));
   }, [bookDetails]);
 
-  const handleSubmitBooking = () => {
+  const handleSubmitBooking = async () => {
     const body = {
       ...bookDetails,
       listing: listing._id,
       totalAmount:
         listing.rate * nights + (listing.cleaningFee ? listing.cleaningFee : 0),
     };
-    registerBooking(body);
+    await registerBooking(body);
+    history.push({ pathname: "/booking", state: listing });
   };
 
   // const total = useMemo(() => {

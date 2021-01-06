@@ -110,6 +110,7 @@ function AppState(props) {
         doLogout,
         doRegister,
         registerBooking,
+        booking: state.booking,
       }}
     >
       {props.children}

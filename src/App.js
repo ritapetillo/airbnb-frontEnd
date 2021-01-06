@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import SearchPage from "./components/SearchPage";
 import ListingsMap from "./components/ListingsMap";
 import ListingPage from "./components/ListingPage";
+import ConfirmBooking from "./components/ConfirmBooking";
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
           exact
           path="/listing/:id"
           render={(props) => <ListingPage {...props} />}
+        />
+        <Route
+          exact
+          path="/booking"
+          render={(props) => <ConfirmBooking {...props} />}
         />
       </Switch>
     </div>

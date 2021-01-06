@@ -5,7 +5,7 @@ import "../style/ListingPage.css";
 import StarIcon from "@material-ui/icons/Star";
 import BookingForm from "./BookingForm";
 
-function ListingPage({ match }) {
+function ListingPage({ match, history }) {
   const [listing, setListing] = useState({});
   useEffect(() => {
     if (match.params.id) {
@@ -55,7 +55,7 @@ function ListingPage({ match }) {
               <span className="divider mt-3"></span>
             </Col>
             <Col md={4}>
-              <BookingForm listing={listing} />
+              <BookingForm listing={listing} history={history} />
             </Col>
           </div>
         </>
