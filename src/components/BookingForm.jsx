@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useMemo } from "react";
 import { Row, Col } from "react-bootstrap";
 import "../style/BookingForm.css";
 import StarIcon from "@material-ui/icons/Star";
@@ -6,29 +6,39 @@ import AppContext from "../context/app-context";
 import { getTotNights } from "../lib/datesCalc";
 
 function BookingForm({ listing }) {
-  const [bookDetails, setBookDetails] = useState({});
-  const [nights, setNights] = useState("");
+  const [bookDetails, setBookDetails] = useState({
+    checkin: "",
+    checkout: "",
+    guests: "",
+  });
+  const [nights, setNights] = useState(0);
   const [tot, setTot] = useState("");
 
   const { lastSearch, user, registerBooking } = useContext(AppContext);
+
   useEffect(() => {
     setBookDetails({
       ...lastSearch,
     });
-    setNights(getTotNights(lastSearch.checkin, lastSearch.checkout));
-    const cleaningFees = listing.cleaningFee ? listing.cleaningFee : 0;
-    setTot(Number(nights * listing.rate + cleaningFees));
-    console.log(tot);
   }, []);
+
+  useEffect(() => {
+    setNights(getTotNights(bookDetails?.checkin, bookDetails?.checkout));
+  }, [bookDetails]);
 
   const handleSubmitBooking = () => {
     const body = {
       ...bookDetails,
       listing: listing._id,
-      totalAmount: tot,
+      totalAmount:
+        listing.rate * nights + (listing.cleaningFee ? listing.cleaningFee : 0),
     };
     registerBooking(body);
   };
+
+  // const total = useMemo(() => {
+  //   setTot(Number(nights * listing.rate));
+  // }, [nights]);
 
   return (
     <div className="BookingForm">
@@ -44,7 +54,7 @@ function BookingForm({ listing }) {
         <Col sm={12} md={6}>
           <small>CHECK-IN</small>
           <input
-            value={lastSearch?.checkin}
+            value={bookDetails && bookDetails.checkin}
             type="date"
             onChange={(e) =>
               setBookDetails({ ...bookDetails, checkin: e.target.value })
@@ -54,7 +64,7 @@ function BookingForm({ listing }) {
         <Col sm={12} md={6}>
           <small>CHECK-OUT</small>
           <input
-            value={lastSearch?.checkout}
+            value={bookDetails && bookDetails.checkout}
             type="date"
             onChange={(e) =>
               setBookDetails({ ...bookDetails, checkout: e.target.value })
@@ -65,7 +75,7 @@ function BookingForm({ listing }) {
           {" "}
           <small>GUESTS</small>
           <input
-            value={lastSearch?.guests}
+            value={bookDetails && bookDetails.guests}
             type="number"
             onChange={(e) =>
               setBookDetails({ ...bookDetails, guests: e.target.value })
@@ -98,7 +108,11 @@ function BookingForm({ listing }) {
       <Row className="justify-content-between mt-2">
         <h6>Total</h6>
 
-        <h6>${tot}</h6>
+        <h6>
+          ${" "}
+          {listing.rate * nights +
+            (listing.cleaningFee ? listing.cleaningFee : 0)}
+        </h6>
       </Row>
     </div>
   );
