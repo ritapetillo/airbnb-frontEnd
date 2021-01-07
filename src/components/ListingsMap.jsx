@@ -13,7 +13,7 @@ function ListingsMap({history}) {
     return (
         <div>
             {listings ?
-            <MapContainer center={[listings[0].address[0].latitude,-80.1448668]} zoom={13} scrollWheelZoom={false}>
+            <MapContainer center={[listings[0].address[0].latitude,listings[0].address[0].longitude]} zoom={13} scrollWheelZoom={false}>
   <TileLayer
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
