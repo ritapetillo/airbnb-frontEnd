@@ -17,10 +17,10 @@ function ListingResult({ listing, lastSearch }) {
   };
 
   useEffect(() => {
-    const nights = getTotNights(lastSearch.checkin, lastSearch.checkout);
+    const nights = lastSearch && getTotNights(lastSearch.checkin, lastSearch.checkout);
     const totRate = nights * listing?.rate;
     setTotRate(totRate);
-  }, [listing]);
+  }, [listing,lastSearch]);
 
   const arrayFeatures = (features) => {
     const array = features.split(",");

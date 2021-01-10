@@ -30,6 +30,18 @@ function NavBar({ history }) {
   const { isAuth, doLogout, user } = useContext(AppContext);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
+  const [userName,setUsername] = useState("")
+
+  const setUsernameFunc = async ()=>{
+    const username = user && await user
+    setUsername(username)
+
+  }
+  
+  useEffect(() => {
+setUsernameFunc()  
+console.log(userName)
+  }, [user && user])
 
   const ref = useRef();
 

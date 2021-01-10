@@ -4,28 +4,35 @@ import AppContext from "./app-context";
 import appReducer from "./app-reducer";
 import { getListingsResearch, login, getUser, register } from "../lib/fetches";
 import appContext from "./app-context";
+import useReducerPersisted from 'use-reducer-persisted';
+
 
 function AppState(props) {
   const [isAuth, setisAuth] = useState(false);
   const [lastSearch, setLastSearch] = useState();
-  const initialState = {
+  const initialState = {...JSON.parse(localStorage.getItem('state'))} || {
     listings: [],
     currentListing: "",
     user: "",
     isAuth: false,
     booking: "",
   };
-  const [state, dispatch] = useReducer(appReducer, initialState);
+
+  console.log(initialState)
+  const [state, dispatch] = useReducerPersisted("state",appReducer, initialState, "local");
+
+  // const [state, dispatch] = useReducer(appReducer, initialState);
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("TOKEN"));
-    if (token) {
-      const user = getUser(token);
-      dispatch({
-        type: AUTH,
-        payload: user,
-      });
-    }
+    // const token = JSON.parse(localStorage.getItem("TOKEN"));
+    // if (token) {
+    //   const user = getUser(token);
+    //   dispatch({
+    //     type: AUTH,
+    //     payload: user,
+    //   });
+    // }
   }, []);
+
 
   const doLogin = async (cred) => {
     try {
