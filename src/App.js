@@ -8,6 +8,7 @@ import SearchPage from "./components/SearchPage";
 import ListingsMap from "./components/ListingsMap";
 import ListingPage from "./components/ListingPage";
 import ConfirmBooking from "./components/ConfirmBooking";
+import Bookings from "./components/Bookings";
 
 function App() {
   return (
@@ -35,6 +36,11 @@ function App() {
           exact
           path="/booking"
           render={(props) => <ConfirmBooking {...props} />}
+        />
+        <Route
+          exact
+          path="/bookings"
+          render={(props) => <Bookings {...props} />}
         />
       </Switch>
     </div>

@@ -1,4 +1,10 @@
-import { SEARCH_LISTINGS, AUTH, LOGOUT, REGISTER_BOOKING } from "./app-actions";
+import {
+  SEARCH_LISTINGS,
+  AUTH,
+  LOGOUT,
+  REGISTER_BOOKING,
+  GET_CURRENT_USER_BOOKINGS,
+} from "./app-actions";
 
 const appReducer = (state, action) => {
   console.log(action);
@@ -24,6 +30,11 @@ const appReducer = (state, action) => {
       return {
         ...state,
         booking: action.payload,
+      };
+    case GET_CURRENT_USER_BOOKINGS:
+      return {
+        ...state,
+        prevBookings: action.payload,
       };
 
     default:

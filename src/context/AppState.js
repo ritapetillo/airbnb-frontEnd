@@ -1,5 +1,11 @@
 import React, { useState, useReducer, useEffect } from "react";
-import { SEARCH_LISTINGS, AUTH, LOGOUT, REGISTER_BOOKING } from "./app-actions";
+import {
+  SEARCH_LISTINGS,
+  AUTH,
+  LOGOUT,
+  REGISTER_BOOKING,
+  GET_CURRENT_USER_BOOKINGS,
+} from "./app-actions";
 import AppContext from "./app-context";
 import appReducer from "./app-reducer";
 import {
@@ -8,9 +14,11 @@ import {
   getUser,
   register,
   postBooking,
+  getCurrentUserBookings,
 } from "../lib/fetches";
 import appContext from "./app-context";
 import useReducerPersisted from "use-reducer-persisted";
+import { ClickAwayListener } from "@material-ui/core";
 
 function AppState(props) {
   const [isAuth, setisAuth] = useState(false);
@@ -50,6 +58,7 @@ function AppState(props) {
       if (token) {
         await localStorage.setItem("TOKEN", JSON.stringify(token));
         const user = await getUser(token);
+
         dispatch({
           type: AUTH,
           payload: user,
@@ -141,6 +150,18 @@ function AppState(props) {
     }
   };
 
+  const retrieveCurrentUserBookings = async () => {
+    try {
+      const prevBookings = await getCurrentUserBookings();
+      dispatch({
+        type: GET_CURRENT_USER_BOOKINGS,
+        payload: prevBookings,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -155,7 +176,9 @@ function AppState(props) {
         doRegister,
         registerBooking,
         preBooking,
+        retrieveCurrentUserBookings,
         booking: state.booking,
+        prevBookings: state.prevBookings,
       }}
     >
       {props.children}

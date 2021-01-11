@@ -137,3 +137,25 @@ export const postBooking = async (body) => {
     console.log("there was a problem creating the booking");
   }
 };
+
+export const getCurrentUserBookings = async () => {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("auth-token", TOKEN && TOKEN);
+  console.log(TOKEN);
+  const requestOptions = {
+    headers: myHeaders,
+    method: "GET",
+  };
+  try {
+    const res = await fetch(`${REACT_APP_API_URI}/bookings/all/me`,requestOptions);
+    const data = await res.json();
+    if (res.ok) {
+      return data;
+    } else {
+      console.log("there was a problem fetching data");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};

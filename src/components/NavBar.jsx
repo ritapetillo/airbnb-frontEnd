@@ -30,18 +30,17 @@ function NavBar({ history }) {
   const { isAuth, doLogout, user } = useContext(AppContext);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
-  const [userName,setUsername] = useState("")
+  const [userName, setUsername] = useState("");
 
-  const setUsernameFunc = async ()=>{
-    const username = user && await user
-    setUsername(username)
+  const setUsernameFunc = async () => {
+    const username = user && (await user);
+    setUsername(username);
+  };
 
-  }
-  
   useEffect(() => {
-setUsernameFunc()  
-console.log(userName)
-  }, [user && user])
+    setUsernameFunc();
+    console.log(userName);
+  }, [user && user]);
 
   const ref = useRef();
 
@@ -114,12 +113,12 @@ console.log(userName)
                   <>
                     <NavDropdown.Item
                       onClick={() => setShowLogin(!showLogin)}
-                      href="#action/3.1"
+                      href=""
                     >
                       Login
                     </NavDropdown.Item>
                     <NavDropdown.Item
-                      href="#action/3.2"
+                      href=""
                       onClick={() => setShowSignUp(!showSignUp)}
                     >
                       Sign Up
@@ -130,18 +129,22 @@ console.log(userName)
                   <span className="ml-4">Hi {user && user.firstName}</span>
                 )}
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Host your home
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4">Help</NavDropdown.Item>
+                <NavDropdown.Item href="">Host your home</NavDropdown.Item>
+
                 {isAuth && (
-                  <NavDropdown.Item
-                    href="#action/3.4"
-                    onClick={() => doLogout()}
-                  >
-                    Logout
-                  </NavDropdown.Item>
+                  <>
+                    <NavDropdown.Item
+                      href=""
+                      onClick={() => history.push("/bookings")}
+                    >
+                      My Trips
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="" onClick={() => doLogout()}>
+                      Logout
+                    </NavDropdown.Item>
+                  </>
                 )}
+                <NavDropdown.Item href="">Help</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

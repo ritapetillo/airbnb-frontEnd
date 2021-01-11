@@ -37,7 +37,11 @@ function ConfirmBooking({ location, history }) {
     <Container className="confirmBooking">
       <Row>
         <h2 className="mt-5 mb-5">
-          <ArrowBackIosIcon /> Confirm and pay
+          <ArrowBackIosIcon
+            onClick={() => history.goBack()}
+            style={{ cursor: "pointer" }}
+          />{" "}
+          Confirm and pay
         </h2>
       </Row>
       <Row>

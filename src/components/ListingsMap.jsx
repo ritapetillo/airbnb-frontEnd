@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AppContext from "../context/app-context";
 import ListIcon from "@material-ui/icons/List";
+import { Container, Row, Column } from "react-bootstrap";
 import "../style/ListingsMap.css";
 
 function ListingsMap({ history }) {
@@ -32,9 +33,21 @@ function ListingsMap({ history }) {
               ]}
             >
               <Popup>
-                <Link to={`/listing/${listing._id}`}> {listing.name}</Link>{" "}
-                <br />{" "}
-                <img src={listing.images[0]} style={{ height: "50px" }} />
+                <Container>
+                  <Link to={`/listing/${listing._id}`}>
+                    {" "}
+                    <h6>{listing.name}</h6>
+                  </Link>{" "}
+                  <br />{" "}
+                  <Row className="d-flex flex-wrap">
+                    <img src={listing.images[0]} style={{ height: "50px" }} />
+                    <div className="ml-3 mt-0 d-flex flex-column">
+                      <span> Bedrooms: {listing.bedrooms}</span>
+                      <span>Guests: {listing.guests}</span>
+                      <span>Rate: ${listing.rate}</span>
+                    </div>
+                  </Row>
+                </Container>
               </Popup>
             </Marker>
           ))}
