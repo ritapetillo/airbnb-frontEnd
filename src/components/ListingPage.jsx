@@ -4,8 +4,7 @@ import { getListingById } from "../lib/fetches";
 import "../style/ListingPage.css";
 import StarIcon from "@material-ui/icons/Star";
 import BookingForm from "./BookingForm";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 function ListingPage({ match, history }) {
   const [listing, setListing] = useState({});
@@ -55,18 +54,33 @@ function ListingPage({ match, history }) {
                 {listing.beds} beds - {listing.bathrooms} bathrooms{" "}
               </span>
               <span className="divider mt-3"></span>
-              {listing.address && <MapContainer center={[listing.address[0].latitude,listing.address[0].longitude]} zoom={13} scrollWheelZoom={false}>
-  <TileLayer
-    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  />
- <Marker position={[listing.address[0].latitude,listing.address[0].longitude]}>
-    <Popup>
-     {listing.name} <br /> <img src={listing.images[0]} style={{height:'50px'}}/>
-    </Popup>
-  </Marker>
-  
-</MapContainer> }
+              <p className="my-3">{listing.about}</p>
+              {listing.address && (
+                <MapContainer
+                  center={[
+                    listing.address[0].latitude,
+                    listing.address[0].longitude,
+                  ]}
+                  zoom={13}
+                  scrollWheelZoom={false}
+                >
+                  <TileLayer
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <Marker
+                    position={[
+                      listing.address[0].latitude,
+                      listing.address[0].longitude,
+                    ]}
+                  >
+                    <Popup>
+                      {listing.name} <br />{" "}
+                      <img src={listing.images[0]} style={{ height: "50px" }} />
+                    </Popup>
+                  </Marker>
+                </MapContainer>
+              )}
             </Col>
             <Col md={4}>
               <BookingForm listing={listing} history={history} />

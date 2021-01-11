@@ -1,0 +1,45 @@
+.confirmBooking__listing-box {
+  min-height: 300px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 30px;
+}
+.confirmBooking__listing-box small {
+  font-size: 12px;
+}
+
+.confirmBooking__listing-box__name {
+  font-size: 14px;
+}
+.confirmBooking__listing-box-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.confirmBooking__listing-box .total {
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: underline;
+}
+.ConfirmBooking__reserve-cta {
+  color: white;
+  background: linear-gradient(
+    to right,
+    rgb(230, 30, 77) 0%,
+    rgb(227, 28, 95) 50%,
+    rgb(215, 4, 102) 100%
+  ) !important;
+  background-image: linear-gradient(
+    to right,
+    rgb(230, 30, 77) 0%,
+    rgb(227, 28, 95) 50%,
+    rgb(215, 4, 102) 100%
+  ) !important;
+  width: 100%;
+  display: block;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: 700;
+}

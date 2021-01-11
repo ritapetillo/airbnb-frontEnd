@@ -2,15 +2,20 @@ import React, { useState, useReducer, useEffect } from "react";
 import { SEARCH_LISTINGS, AUTH, LOGOUT, REGISTER_BOOKING } from "./app-actions";
 import AppContext from "./app-context";
 import appReducer from "./app-reducer";
-import { getListingsResearch, login, getUser, register } from "../lib/fetches";
+import {
+  getListingsResearch,
+  login,
+  getUser,
+  register,
+  postBooking,
+} from "../lib/fetches";
 import appContext from "./app-context";
-import useReducerPersisted from 'use-reducer-persisted';
-
+import useReducerPersisted from "use-reducer-persisted";
 
 function AppState(props) {
   const [isAuth, setisAuth] = useState(false);
   const [lastSearch, setLastSearch] = useState();
-  const initialState = {...JSON.parse(localStorage.getItem('state'))} || {
+  const initialState = { ...JSON.parse(localStorage.getItem("state")) } || {
     listings: [],
     currentListing: "",
     user: "",
@@ -18,8 +23,13 @@ function AppState(props) {
     booking: "",
   };
 
-  console.log(initialState)
-  const [state, dispatch] = useReducerPersisted("state",appReducer, initialState, "local");
+  console.log(initialState);
+  const [state, dispatch] = useReducerPersisted(
+    "state",
+    appReducer,
+    initialState,
+    "local"
+  );
 
   // const [state, dispatch] = useReducer(appReducer, initialState);
   useEffect(() => {
@@ -32,7 +42,6 @@ function AppState(props) {
     //   });
     // }
   }, []);
-
 
   const doLogin = async (cred) => {
     try {
@@ -97,11 +106,39 @@ function AppState(props) {
   };
 
   const registerBooking = async (body) => {
-    dispatch({
-      type: REGISTER_BOOKING,
-      payload: body,
-    });
-    console.log(body);
+    try {
+      const booking = {
+        ...body,
+        isCompleted: true,
+      };
+      const bookingMade = await postBooking(body);
+      console.log(bookingMade);
+      console.log(body);
+      dispatch({
+        type: REGISTER_BOOKING,
+        payload: booking,
+      });
+      return bookingMade;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const preBooking = async (booking) => {
+    try {
+      const bookingData = {
+        ...booking,
+        isCompleted: false,
+      };
+
+      dispatch({
+        type: REGISTER_BOOKING,
+        payload: bookingData,
+      });
+    } catch (err) {
+      console.log("It was not possible to compelete the booking");
+      return undefined;
+    }
   };
 
   return (
@@ -117,6 +154,7 @@ function AppState(props) {
         doLogout,
         doRegister,
         registerBooking,
+        preBooking,
         booking: state.booking,
       }}
     >

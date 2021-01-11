@@ -1,5 +1,5 @@
 const { REACT_APP_API_URI } = process.env;
-const TOKEN = JSON.parse(localStorage.getItem("token"));
+const TOKEN = JSON.parse(localStorage.getItem("TOKEN"));
 export const getListingsResearch = async (city, checkin, checkout, guests) => {
   console.log(city);
   try {
@@ -110,10 +110,12 @@ export const getUser = async (token) => {
 };
 
 //make booking
-const postBooking = async (body) => {
+export const postBooking = async (body) => {
   var myHeaders = new Headers();
+  console.log(body);
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("auth-token", TOKEN && TOKEN);
+  console.log(TOKEN);
   const requestOptions = {
     headers: myHeaders,
     method: "POST",

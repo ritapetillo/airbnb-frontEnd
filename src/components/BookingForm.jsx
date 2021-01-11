@@ -14,7 +14,7 @@ function BookingForm({ listing, history }) {
   const [nights, setNights] = useState(0);
   const [tot, setTot] = useState("");
 
-  const { lastSearch, user, registerBooking } = useContext(AppContext);
+  const { lastSearch, user, preBooking } = useContext(AppContext);
 
   useEffect(() => {
     setBookDetails({
@@ -30,10 +30,11 @@ function BookingForm({ listing, history }) {
     const body = {
       ...bookDetails,
       listing: listing._id,
+      nights: nights,
       totalAmount:
         listing.rate * nights + (listing.cleaningFee ? listing.cleaningFee : 0),
     };
-    await registerBooking(body);
+    await preBooking(body);
     history.push({ pathname: "/booking", state: listing });
   };
 
